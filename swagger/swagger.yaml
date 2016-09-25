@@ -1,0 +1,275 @@
+basePath: /cellar-aaa
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  Accountbbb:
+    description: A Accountccc (default view)
+    example:
+      created_at: 1999-09-11T21:07:36-05:00
+      created_by: me@moeboe.io
+      href: /accountbbb/1
+      id: 1
+      name: test
+    properties:
+      created_at:
+        description: Date of creation
+        example: 1999-09-11T21:07:36-05:00
+        format: date-time
+        type: string
+      created_by:
+        description: Email of accountbbb owner
+        example: me@moeboe.io
+        format: email
+        type: string
+      href:
+        description: API href of accountbbb
+        example: /accountbbb/1
+        type: string
+      id:
+        description: ID of accountbbb
+        example: 1
+        format: int64
+        type: integer
+      name:
+        description: Name of accountbbb
+        example: test
+        type: string
+    required:
+    - id
+    - href
+    - name
+    - created_at
+    - created_by
+    title: 'Mediatype identifier: application/vnd.accountbbb+json; view=default'
+    type: object
+  AccountbbbCollection:
+    description: AccountbbbCollection is the media type for an array of Accountbbb
+      (default view)
+    example:
+    - created_at: 1999-09-11T21:07:36-05:00
+      created_by: me@moeboe.io
+      href: /accountbbb/1
+      id: 1
+      name: test
+    - created_at: 1999-09-11T21:07:36-05:00
+      created_by: me@moeboe.io
+      href: /accountbbb/1
+      id: 1
+      name: test
+    - created_at: 1999-09-11T21:07:36-05:00
+      created_by: me@moeboe.io
+      href: /accountbbb/1
+      id: 1
+      name: test
+    items:
+      $ref: '#/definitions/Accountbbb'
+    title: 'Mediatype identifier: application/vnd.accountbbb+json; type=collection'
+    type: array
+  CreateAccountbbbPayload:
+    example:
+      name: test
+    properties:
+      name:
+        description: Name of accountbbb
+        example: test
+        type: string
+    required:
+    - name
+    title: CreateAccountbbbPayload
+    type: object
+  UpdateAccountbbbPayload:
+    example:
+      name: test
+    properties:
+      name:
+        description: Name of accountbbb
+        example: test
+        type: string
+    required:
+    - name
+    title: UpdateAccountbbbPayload
+    type: object
+  error:
+    description: Error response media type (default view)
+    example:
+      code: invalid_value
+      detail: Value of ID must be an integer
+      id: 3F1FKVRR
+      meta:
+        timestamp: 1.458609e+09
+      status: "400"
+    properties:
+      code:
+        description: an application-specific error code, expressed as a string value.
+        example: invalid_value
+        type: string
+      detail:
+        description: a human-readable explanation specific to this occurrence of the
+          problem.
+        example: Value of ID must be an integer
+        type: string
+      id:
+        description: a unique identifier for this particular occurrence of the problem.
+        example: 3F1FKVRR
+        type: string
+      meta:
+        additionalProperties: true
+        description: a meta object containing non-standard meta-information about
+          the error.
+        example:
+          timestamp: 1.458609e+09
+        type: object
+      status:
+        description: the HTTP status code applicable to this problem, expressed as
+          a string value.
+        example: "400"
+        type: string
+    title: 'Mediatype identifier: application/vnd.goa.error'
+    type: object
+host: localhost:8081
+info:
+  contact:
+    email: chuck@moeboe.io
+    name: moeboe team
+    url: http://moeboe.io
+  description: cellar-aaa description
+  title: cellar-aaa title
+  version: ""
+paths:
+  /accountbbbs:
+    get:
+      description: Retrieve all accountbbbs.
+      operationId: accountbbb#list
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountbbbCollection'
+      schemes:
+      - http
+      summary: list accountbbb
+      tags:
+      - accountbbb
+    post:
+      description: Create new accountbbb
+      operationId: accountbbb#create
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/CreateAccountbbbPayload'
+      responses:
+        "201":
+          description: Resource created
+          headers:
+            Location:
+              description: href to created resource
+              pattern: /accountbbbs/[0-9]+
+              type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: create accountbbb
+      tags:
+      - accountbbb
+  /accountbbbs/{accountbbbID}:
+    delete:
+      operationId: accountbbb#delete
+      parameters:
+      - description: accountbbb ID
+        in: path
+        name: accountbbbID
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: delete accountbbb
+      tags:
+      - accountbbb
+    get:
+      description: Retrieve accountbbb with given id.
+      operationId: accountbbb#show
+      parameters:
+      - description: accountbbb ID
+        in: path
+        minimum: 1
+        name: accountbbbID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Accountbbb'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: show accountbbb
+      tags:
+      - accountbbb
+    put:
+      description: Change accountbbb name
+      operationId: accountbbb#update
+      parameters:
+      - description: accountbbb ID
+        in: path
+        name: accountbbbID
+        required: true
+        type: integer
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateAccountbbbPayload'
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: update accountbbb
+      tags:
+      - accountbbb
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+responses:
+  NoContent:
+    description: No Content
+  NotFound:
+    description: Not Found
+  OK:
+    description: OK
+    schema:
+      $ref: '#/definitions/Accountbbb'
+schemes:
+- http
+swagger: "2.0"
