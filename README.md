@@ -1,5 +1,5 @@
 # gorma-sample
-This is a sample project created from the [gorma-design-base](https://github.com/cboecking/goa-design-base). with the following properties:
+This is a sample gorma project. The purpose of the repository is to help you better understand the components of goa and gorma. It was created from the [gorma-design-base](https://github.com/cboecking/goa-design-base). with the following properties:
 
 * MOEBOE_PROP_YOUR_REPO_NAME=github.com
 * MOEBOE_PROP_YOUR_GIT_USER_NAME=cboecking
