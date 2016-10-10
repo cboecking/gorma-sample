@@ -12,3 +12,23 @@ This is a sample gorma project. The purpose of the repository is to help you bet
 * MOEBOE_PROP_GORMA_STORAGE_MODEL=Accountddd
 
 Notice that no two parameters are the same. This helps you understand the code better by isolating each component with a different name. Learning the framework is harder when everythig (resource, mediatype, model, etc..) is named 'account'.
+
+Note: assumes you have postgresql installed either locally or via docker. (ACTION: show links to both)
+
+To launch the service:
+
+* `cd $GOPATH/src/github.com/cboecking/gorma-sample/`
+* `go build .`
+* `./gorma-sample`
+
+To interact with the service:
+
+* List accounts: `http http://localhost:8081/cellar-aaa/accountbbbs`
+* Create an account: `http POST http://localhost:8081/cellar-aaa/accountbbbs name=chuck`
+* List accounts: `http http://localhost:8081/cellar-aaa/accountbbbs`
+* Create another account: `http POST http://localhost:8081/cellar-aaa/accountbbbs name=tom`
+* Show single account: `http http://localhost:8081/cellar-aaa/accountbbbs/2`
+* List accounts: `http http://localhost:8081/cellar-aaa/accountbbbs`
+* Delete an account: `http DELETE http://localhost:8081/cellar-aaa/accountbbbs/2`
+* Update an account: `http PUT http://localhost:8081/cellar-aaa/accountbbbs/1 name=1updated`
+* List accounts: `http http://localhost:8081/cellar-aaa/accountbbbs`
